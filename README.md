@@ -1,10 +1,14 @@
+> **Moved:** DAW Vocal Denoiser v1d now lives in **[Daw-Vocal-Denoiser/versions/v1d](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser/tree/main/versions/v1d)**, together with every other version,
+> one shared codebase and a results table across all versions. This repository is archived (read-only); its full history
+> is part of Daw-Vocal-Denoiser.
+
 # DAW Vocal Denoiser v1d
 
 > **AI disclosure:** This project was built with AI assistance (Claude, by Anthropic) for writing code and
 > documentation. All creative and technical decisions (model design, training data, evaluation) are mine, and I
 > reviewed everything before publishing.
 
-🤗 [Model on Hugging Face](https://huggingface.co/Stavion-Colquitt/DAW_Vocal_Denoiser_v1d) · v1: [Daw-Vocal-Denoiser](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser) · v1c: [Daw-Vocal-Denoiser-v1c](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser-v1c) · 🎧 [Live demo](https://huggingface.co/spaces/Stavion-Colquitt/Realtime_Denoisers) · 📋 [Project board](https://github.com/users/Stavion-Colquitt/projects/2)
+🤗 [Model on Hugging Face](https://huggingface.co/Stavion-Colquitt/DAW_Vocal_Denoiser_v1d) · v1: [Daw-Vocal-Denoiser](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser) · v1c: [Daw-Vocal-Denoiser-v1c](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser/tree/main/versions/v1c) · 🎧 [Live demo](https://huggingface.co/spaces/Stavion-Colquitt/Realtime_Denoisers) · 📋 [Project board](https://github.com/users/Stavion-Colquitt/projects/2)
 
 Version 1d of my [DAW Vocal Denoiser](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser): v1c's exact recipe (GRU 256, same data, same 108,779 steps) with one change, **5 ms of lookahead**: each frame's mask is computed after the model has heard one more 5 ms hop of input, for **15 ms algorithmic latency** instead of 10 ms. Same size as v1c (1.25M parameters). The question v1d asks: how much quality does 5 ms buy?
 
@@ -32,7 +36,7 @@ runs on exactly the same clips through the streaming engine (`compare.py` / `com
 | My voice (86 clips) | +0.09 ± 0.24 | +0.14 ± 0.22 | **+0.08 ± 0.02** | **+0.01 ± 0.01** |
 | Other singers, VocalSet (94 clips) | +0.23 ± 0.30 | +0.22 ± 0.28 | **+0.07 ± 0.03** | +0.01 ± 0.03 |
 
-**What this shows:** 5 ms of lookahead buys about as much as doubling the model. v1d and [v1b](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser-v1b) (GRU 384, 2x the parameters) are tied within error on every metric, and both beat v1c on predicted quality (PESQ, all voices). v1d gets there at **half v1b's CPU cost and file size**, and keeps clean takes almost as untouched as v1c (50.5 vs 51.1 dB pass-through, v1b 47.6). The price is 5 ms more latency (15 ms total), still low enough to monitor through. Its SI-SDR gain over v1c (+0.17 dB) is not significant on 180 clips, so the clearest win is quality per CPU, not raw accuracy.
+**What this shows:** 5 ms of lookahead buys about as much as doubling the model. v1d and [v1b](https://github.com/Stavion-Colquitt/Daw-Vocal-Denoiser/tree/main/versions/v1b) (GRU 384, 2x the parameters) are tied within error on every metric, and both beat v1c on predicted quality (PESQ, all voices). v1d gets there at **half v1b's CPU cost and file size**, and keeps clean takes almost as untouched as v1c (50.5 vs 51.1 dB pass-through, v1b 47.6). The price is 5 ms more latency (15 ms total), still low enough to monitor through. Its SI-SDR gain over v1c (+0.17 dB) is not significant on 180 clips, so the clearest win is quality per CPU, not raw accuracy.
 
 ## Results (dev set)
 
